@@ -721,9 +721,8 @@ void protobuf_AssignDesc_cockroach_2fproto_2fapi_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AdminSplitResponse));
   AdminMergeRequest_descriptor_ = file->message_type(33);
-  static const int AdminMergeRequest_offsets_[2] = {
+  static const int AdminMergeRequest_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AdminMergeRequest, header_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AdminMergeRequest, subsumed_range_),
   };
   AdminMergeRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1054,14 +1053,13 @@ void protobuf_AddDesc_cockroach_2fproto_2fapi_2eproto() {
     "aderB\010\310\336\037\000\320\336\037\001\022\036\n\tsplit_key\030\002 \001(\014B\013\310\336\037\000\332"
     "\336\037\003Key\"O\n\022AdminSplitResponse\0229\n\006header\030\001"
     " \001(\0132\037.cockroach.proto.ResponseHeaderB\010\310"
-    "\336\037\000\320\336\037\001\"\215\001\n\021AdminMergeRequest\0228\n\006header\030"
-    "\001 \001(\0132\036.cockroach.proto.RequestHeaderB\010\310"
-    "\336\037\000\320\336\037\001\022>\n\016subsumed_range\030\002 \001(\0132 .cockro"
-    "ach.proto.RangeDescriptorB\004\310\336\037\000\"O\n\022Admin"
-    "MergeResponse\0229\n\006header\030\001 \001(\0132\037.cockroac"
-    "h.proto.ResponseHeaderB\010\310\336\037\000\320\336\037\001*L\n\023Read"
-    "ConsistencyType\022\016\n\nCONSISTENT\020\000\022\r\n\tCONSE"
-    "NSUS\020\001\022\020\n\014INCONSISTENT\020\002\032\004\210\243\036\000B\007Z\005proto", 5519);
+    "\336\037\000\320\336\037\001\"M\n\021AdminMergeRequest\0228\n\006header\030\001"
+    " \001(\0132\036.cockroach.proto.RequestHeaderB\010\310\336"
+    "\037\000\320\336\037\001\"O\n\022AdminMergeResponse\0229\n\006header\030\001"
+    " \001(\0132\037.cockroach.proto.ResponseHeaderB\010\310"
+    "\336\037\000\320\336\037\001*L\n\023ReadConsistencyType\022\016\n\nCONSIS"
+    "TENT\020\000\022\r\n\tCONSENSUS\020\001\022\020\n\014INCONSISTENT\020\002\032"
+    "\004\210\243\036\000B\007Z\005proto", 5454);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "cockroach/proto/api.proto", &protobuf_RegisterTypes);
   ClientCmdID::default_instance_ = new ClientCmdID();
@@ -11043,7 +11041,6 @@ void AdminSplitResponse::Swap(AdminSplitResponse* other) {
 
 #ifndef _MSC_VER
 const int AdminMergeRequest::kHeaderFieldNumber;
-const int AdminMergeRequest::kSubsumedRangeFieldNumber;
 #endif  // !_MSC_VER
 
 AdminMergeRequest::AdminMergeRequest()
@@ -11054,7 +11051,6 @@ AdminMergeRequest::AdminMergeRequest()
 
 void AdminMergeRequest::InitAsDefaultInstance() {
   header_ = const_cast< ::cockroach::proto::RequestHeader*>(&::cockroach::proto::RequestHeader::default_instance());
-  subsumed_range_ = const_cast< ::cockroach::proto::RangeDescriptor*>(&::cockroach::proto::RangeDescriptor::default_instance());
 }
 
 AdminMergeRequest::AdminMergeRequest(const AdminMergeRequest& from)
@@ -11067,7 +11063,6 @@ AdminMergeRequest::AdminMergeRequest(const AdminMergeRequest& from)
 void AdminMergeRequest::SharedCtor() {
   _cached_size_ = 0;
   header_ = NULL;
-  subsumed_range_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -11079,7 +11074,6 @@ AdminMergeRequest::~AdminMergeRequest() {
 void AdminMergeRequest::SharedDtor() {
   if (this != default_instance_) {
     delete header_;
-    delete subsumed_range_;
   }
 }
 
@@ -11105,13 +11099,8 @@ AdminMergeRequest* AdminMergeRequest::New() const {
 }
 
 void AdminMergeRequest::Clear() {
-  if (_has_bits_[0 / 32] & 3) {
-    if (has_header()) {
-      if (header_ != NULL) header_->::cockroach::proto::RequestHeader::Clear();
-    }
-    if (has_subsumed_range()) {
-      if (subsumed_range_ != NULL) subsumed_range_->::cockroach::proto::RangeDescriptor::Clear();
-    }
+  if (has_header()) {
+    if (header_ != NULL) header_->::cockroach::proto::RequestHeader::Clear();
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -11132,19 +11121,6 @@ bool AdminMergeRequest::MergePartialFromCodedStream(
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_header()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(18)) goto parse_subsumed_range;
-        break;
-      }
-
-      // optional .cockroach.proto.RangeDescriptor subsumed_range = 2;
-      case 2: {
-        if (tag == 18) {
-         parse_subsumed_range:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_subsumed_range()));
         } else {
           goto handle_unusual;
         }
@@ -11183,12 +11159,6 @@ void AdminMergeRequest::SerializeWithCachedSizes(
       1, this->header(), output);
   }
 
-  // optional .cockroach.proto.RangeDescriptor subsumed_range = 2;
-  if (has_subsumed_range()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->subsumed_range(), output);
-  }
-
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -11204,13 +11174,6 @@ void AdminMergeRequest::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->header(), target);
-  }
-
-  // optional .cockroach.proto.RangeDescriptor subsumed_range = 2;
-  if (has_subsumed_range()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        2, this->subsumed_range(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -11230,13 +11193,6 @@ int AdminMergeRequest::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->header());
-    }
-
-    // optional .cockroach.proto.RangeDescriptor subsumed_range = 2;
-    if (has_subsumed_range()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->subsumed_range());
     }
 
   }
@@ -11269,9 +11225,6 @@ void AdminMergeRequest::MergeFrom(const AdminMergeRequest& from) {
     if (from.has_header()) {
       mutable_header()->::cockroach::proto::RequestHeader::MergeFrom(from.header());
     }
-    if (from.has_subsumed_range()) {
-      mutable_subsumed_range()->::cockroach::proto::RangeDescriptor::MergeFrom(from.subsumed_range());
-    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -11296,7 +11249,6 @@ bool AdminMergeRequest::IsInitialized() const {
 void AdminMergeRequest::Swap(AdminMergeRequest* other) {
   if (other != this) {
     std::swap(header_, other->header_);
-    std::swap(subsumed_range_, other->subsumed_range_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
